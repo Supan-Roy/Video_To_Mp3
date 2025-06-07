@@ -21,11 +21,9 @@ def convert_video_to_mp3():
             audio = video.audio
 
             output_path = vid_path.rsplit('.', 1)[0] + "_audio.mp3"
-
             audio.write_audiofile(output_path)
 
             progress_bar['value'] = 100
-
             messagebox.showinfo("Success", f"Audio saved as:\n{output_path}")
         except Exception as e:
             messagebox.showerror("Error", f"Something went wrong:\n{str(e)}")
@@ -35,14 +33,16 @@ def convert_video_to_mp3():
 
     threading.Thread(target=conversion_thread).start()
 
+# GUI setup
 app = tk.Tk()
 app.title("Video to MP3 Converter")
-app.geometry("450x250")
+app.geometry("450x270")
 app.configure(bg="#1e1e2f")
 app.resizable(False, False)
 
 font_title = ("Segoe UI", 14, "bold")
 font_button = ("Segoe UI", 12, "bold")
+font_footer = ("Segoe UI", 9, "italic")
 
 label = tk.Label(app, text="Select a video file to convert into MP3", font=font_title, bg="#1e1e2f", fg="#f0f0f5")
 label.pack(pady=(30, 20))
@@ -53,5 +53,8 @@ convert_button = tk.Button(app, text="Choose Video & Convert", command=convert_v
 convert_button.pack()
 
 progress_bar = ttk.Progressbar(app, orient='horizontal', length=300, mode='determinate')
+
+footer = tk.Label(app, text="Made by Supan Roy", font=font_footer, bg="#1e1e2f", fg="#a0a0b0")
+footer.pack(side="bottom", pady=15)
 
 app.mainloop()
